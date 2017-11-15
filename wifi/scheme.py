@@ -1,5 +1,6 @@
 import re
 import itertools
+import time
 
 import wifi.subprocess_compat as subprocess
 from pbkdf2 import PBKDF2
@@ -170,6 +171,7 @@ class Scheme(object):
         """
 
         subprocess.check_output(['/sbin/ifdown', self.interface], stderr=subprocess.STDOUT)
+        time.sleep(1)
         ifup_output = subprocess.check_output(['/sbin/ifup'] + self.as_args(), stderr=subprocess.STDOUT)
         ifup_output = ifup_output.decode('utf-8')
 
